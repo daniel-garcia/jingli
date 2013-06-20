@@ -52,22 +52,22 @@ type Service struct {
 }
 
 // Does the service start when the Service Group is started?
-type (s *Service) Ephemeral() {
+func (s *Service) Ephemeral() {
     return s.ephemeral
 }
 
 // Return the filesystem image associated with the Service.
-type (s *Service) ImageId() {
+func (s *Service) ImageId() {
     return s.image_id
 }
 
 // Return the ResourcePool.Id for this Service
-type (s *Service) ResourcePoolId() {
+func (s *Service) ResourcePoolId() {
     return s.resource_pool_id
 }
 
 // Return the relative priority of the Service
-type (s *Service) Priority() {
+func (s *Service) Priority() {
     return s.priority
 }
 
