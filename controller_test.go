@@ -19,7 +19,10 @@ func TestAddHost(t *testing.T) {
     // add a host
     now := time.Now()
     host, _ := NewHost("localhost", "007f0101", "172.12.14.0/24", 24, 1000000000, now)
-    controller.AddHost(host)
+    err = controller.AddHost(host)
+    if err != nil {
+        t.Errorf("Got a error after adding a host %s", err)
+    }
 
     hosts, err = controller.Hosts()
     if err != nil {

@@ -4,17 +4,24 @@ package jingli
 
 import "time"
 
+
+type HostId string
+
+func (h HostId) String() string {
+    return string(h)
+}
+
 // Host represents a host (physical or virtual) that can host LXC containers.
 type Host struct {
     hostname        string
-    host_id         string // stable / unique id for host
+    host_id         HostId // stable / unique id for host
     private_network string // private network used for running Services
     cores           int
     memory          int
     last_updated    time.Time
 }
 
-func NewHost(host_id, hostname, private_network string, cores, memory int, last_updated time.Time) (host *Host, err error) {
+func NewHost(host_id HostId, hostname, private_network string, cores, memory int, last_updated time.Time) (host *Host, err error) {
     host = new(Host)
     host.hostname = hostname
     host.host_id = host_id
@@ -25,7 +32,7 @@ func NewHost(host_id, hostname, private_network string, cores, memory int, last_
     return host, nil
 }
 
-func (h *Host) HostId() string {
+func (h *Host) HostId() HostId {
     return h.host_id
 }
 

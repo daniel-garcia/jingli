@@ -48,7 +48,7 @@ func (controller *ServiceController) Hosts() (hosts []*Host, err error){
     for rows.Next() {
         err = rows.Scan(&hostid, &hostname, &private_network, &cores, &memory, &last_updated)
         if err != nil { return hosts, err }
-	host, _ := NewHost(hostid, hostname, private_network, cores, memory, last_updated)
+	host, _ := NewHost(HostId(hostid), hostname, private_network, cores, memory, last_updated)
         hosts = append(hosts, host)
     }
     return hosts, nil
@@ -64,7 +64,7 @@ func (controller *ServiceController) AddHost(host *Host) (err error){
     defer con.Close()
 
     _, err = con.Exec("INSERT INTO host ( hostid, hostname, private_network, cores, memory, last_updated) VALUES (?, ?, ?, ?, ?, ?)",
-        host.HostId(), host.Hostname(), host.PrivateNetwork(), host.Cores(), host.Memory(), host.LastUpdated())
+        host.HostId().String(), host.Hostname(), host.PrivateNetwork(), host.Cores(), host.Memory(), host.LastUpdated())
     return err
 }
 
