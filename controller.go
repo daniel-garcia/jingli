@@ -48,7 +48,8 @@ func (controller *ServiceController) Hosts() (hosts []*Host, err error){
     for rows.Next() {
         err = rows.Scan(&hostid, &hostname, &private_network, &cores, &memory, &last_updated)
         if err != nil { return hosts, err }
-        hosts = append(hosts, &Host{hostid, hostname, private_network, cores, memory, last_updated})
+	host, _ := NewHost(hostid, hostname, private_network, cores, memory, last_updated)
+        hosts = append(hosts, host)
     }
     return hosts, nil
 }

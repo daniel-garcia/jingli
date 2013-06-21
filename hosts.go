@@ -14,13 +14,15 @@ type Host struct {
     last_updated    time.Time
 }
 
-func NewHost(hostname, host_id, private_network string, core, memory int, last_updated time.Time) (host *Host, err error) {
+func NewHost(host_id, hostname, private_network string, cores, memory int, last_updated time.Time) (host *Host, err error) {
     host = new(Host)
     host.hostname = hostname
     host.host_id = host_id
     host.private_network = private_network
     host.cores = cores
-    host.memory
+    host.memory = memory
+    host.last_updated = last_updated
+    return host, nil
 }
 
 func (h *Host) HostId() string {

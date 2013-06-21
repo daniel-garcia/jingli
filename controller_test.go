@@ -18,7 +18,7 @@ func TestAddHost(t *testing.T) {
     }
     // add a host
     now := time.Now()
-    host := &Host{"localhost", "007f0101", "172.12.14.0/24", 24, 1000000000, now}
+    host, _ := NewHost("localhost", "007f0101", "172.12.14.0/24", 24, 1000000000, now)
     controller.AddHost(host)
 
     hosts, err = controller.Hosts()
