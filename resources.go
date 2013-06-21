@@ -99,23 +99,6 @@ func (c *Container) StartedAt() time.Time {
 	return c.launched_at
 }
 
-// Host represents a host (physical or virtual) that can host LXC containers.
-type Host struct {
-	hostname        string
-	host_id         string // stable / unique id for host
-	private_network string // private network used for running Services
-}
-
-// get hotname of a host
-func (h *Host) Hostname() string {
-	return h.hostname
-}
-
-// get the private network that containers use on the host
-func (h *Host) PrivateNetwork() string {
-	return h.private_network
-}
-
 // ResourcePool represents a set of resouce restrictions and the hosts that participate in it.
 type ResourcePool struct {
 	id       string   // unique id for ResourcePool
@@ -144,11 +127,4 @@ func (p *ResourcePool) Priority() int {
 // Return the hosts that participate in the resource pool
 func (p *ResourcePool) Hosts() []string {
 	return p.hosts
-}
-
-// The entry point to the control plane.
-type ServiceController struct {
-	instance_id       string
-	name              string
-	connection_string string
 }
